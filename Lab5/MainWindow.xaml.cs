@@ -106,8 +106,7 @@ namespace Lab5
                 normalUserListBox.SelectedItem = null;
                 adminUserListBox.SelectedItem = null;
                 editSelectedUserButton.IsEnabled = false;
-                displaySelectedUserNameLabel.Content = null;
-                displaySelectedUserEmailLabel.Content = null;
+                ClearDisplayInfoLabels();
                 ClearTextBoxes();
                 normalUserListBox.Items.Refresh();
                 adminUserListBox.Items.Refresh();
@@ -164,9 +163,7 @@ namespace Lab5
         {
             toList.Add(objectToTransfer);
             fromList.Remove(objectToTransfer);
-            displaySelectedUserNameLabel.Content = null;
-            displaySelectedUserEmailLabel.Content = null;
-            ClearTextBoxes();
+            ClearDisplayInfoLabels();
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
         }
@@ -175,6 +172,12 @@ namespace Lab5
         {
             userNameTextBox.Clear();
             userEmailTextBox.Clear();
+        }
+
+        private void ClearDisplayInfoLabels()
+        {
+            displaySelectedUserNameLabel.Content = null;
+            displaySelectedUserEmailLabel.Content = null;
         }
     }
 }
