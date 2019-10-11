@@ -65,6 +65,7 @@ namespace Lab5
         {
             string currentText = userNameTextBox.Text;
             Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
+
             if (nonWhitespaceExists.Success)
             {
                 userCreationNameAccepted = true;
@@ -79,6 +80,7 @@ namespace Lab5
             {
                 User userToTransfer = (User)adminUserListBox.SelectedItem;
                 TransferUserToList(userToTransfer, adminUserList, normalUserList);
+                convertToNormalUserButton.IsEnabled = false;
             }
         }
 
@@ -88,6 +90,7 @@ namespace Lab5
             {
                 User userToTransfer = (User)normalUserListBox.SelectedItem;
                 TransferUserToList(userToTransfer, normalUserList, adminUserList);
+                convertToAdminButton.IsEnabled = false;
             }
         }
 
@@ -116,6 +119,11 @@ namespace Lab5
             {
                 userToEdit.Name = userNameTextBox.Text;
                 userToEdit.Email = userEmailTextBox.Text;
+                normalUserListBox.SelectedItem = null;
+                adminUserListBox.SelectedItem = null;
+                editSelectedUserButton.IsEnabled = false;
+                ClearDisplayInfoLabels();
+                ClearTextBoxes();
                 normalUserListBox.Items.Refresh();
                 adminUserListBox.Items.Refresh();
             }
@@ -130,8 +138,13 @@ namespace Lab5
                 displaySelectedUserNameLabel.Content = userToEdit.Name;
                 displaySelectedUserEmailLabel.Content = userToEdit.Email;
                 adminUserListBox.SelectedItem = null;
+                convertToAdminButton.IsEnabled = true;
+                convertToNormalUserButton.IsEnabled = false;
+                OnSelectingAUser();
             }
         }
+
+
         private void OnAdminUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             User userToEdit = null;
@@ -141,7 +154,15 @@ namespace Lab5
                 displaySelectedUserNameLabel.Content = userToEdit.Name;
                 displaySelectedUserEmailLabel.Content = userToEdit.Email;
                 normalUserListBox.SelectedItem = null;
+                convertToNormalUserButton.IsEnabled = true;
+                convertToAdminButton.IsEnabled = false;
+                OnSelectingAUser();
             }
+        }
+        private void OnSelectingAUser()
+        {
+            editSelectedUserButton.IsEnabled = true;
+            removeSelectedUserButton.IsEnabled = true;
         }
 
         private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
@@ -150,6 +171,7 @@ namespace Lab5
             string userEmail = userEmailTextBox.Text;
             User newUser = new User(userName, userEmail);
             normalUserList.Add(newUser);
+            ClearTextBoxes();
             normalUserListBox.Items.Refresh();
         }
 
@@ -157,14 +179,21 @@ namespace Lab5
         {
             toList.Add(objectToTransfer);
             fromList.Remove(objectToTransfer);
+            ClearDisplayInfoLabels();
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
         }
 
-        private string EmailIdentificationRegex()
+        private void ClearTextBoxes()
         {
-            return "lol";
-   ;
+            userNameTextBox.Clear();
+            userEmailTextBox.Clear();
+        }
+
+        private void ClearDisplayInfoLabels()
+        {
+            displaySelectedUserNameLabel.Content = null;
+            displaySelectedUserEmailLabel.Content = null;
         }
     }
 }
