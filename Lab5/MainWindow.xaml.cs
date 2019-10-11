@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,7 +51,10 @@ namespace Lab5
 
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-
+            string currentText = userEmailTextBox.Text;
+            Match nonWhitespaceExists = Regex.Match(currentText, @"[a-z]");
+            if (nonWhitespaceExists.Success) { createNewUserButton.IsEnabled = true; }
+            else { createNewUserButton.IsEnabled = false; }
         }
 
         private void OnConvertToNormalUserButtonClicked(object sender, RoutedEventArgs e)
@@ -73,12 +77,32 @@ namespace Lab5
 
         private void OnRemoveSelectedUserButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            if (normalUserListBox.SelectedItem != null)
+            {
+                User userToRemove = (User)normalUserListBox.SelectedItem;
+                normalUserList.Remove(userToRemove);
+                normalUserListBox.Items.Refresh();
+            }
+            else if (adminUserListBox.SelectedItem != null)
+            {
+                User userToRemove = (User)adminUserListBox.SelectedItem;
+                adminUserList.Remove(userToRemove);
+                adminUserListBox.Items.Refresh();
+            }
         }
 
         private void OnEditSelectedUserButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            User userToEdit = null;
+            if (normalUserListBox.SelectedItem != null) { userToEdit = (User)normalUserListBox.SelectedItem; }
+            else if (adminUserListBox.SelectedItem != null) { userToEdit = (User)adminUserListBox.SelectedItem; }
+            if (userToEdit != null)
+            {
+                userToEdit.Name = userNameTextBox.Text;
+                userToEdit.Email = userEmailTextBox.Text;
+                normalUserListBox.Items.Refresh();
+                adminUserListBox.Items.Refresh();
+            }
         }
 
         private void OnUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
