@@ -5,15 +5,11 @@ ONLY USE BUTTON, LABEL, TEXTBOX AND LISTBOX
 
 CREATE AND CHANGE USERS:
   * Create users:
-    - Disable on empty fields
+    - Disable on username or email already exists
   * Change users:
     - button to be disabled if no user is selected
   * Delete users:
     - button to be disabled if no user is selected
-    
-THE LISTS:
-  * When a user is selected in a list, display full user-information
-    - Label to display full user-information
 
 MOVE USERS:
  * Make admin button disabled when no "normal" user is selected
