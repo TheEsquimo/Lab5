@@ -15,10 +15,6 @@ CREATE AND CHANGE USERS:
     - button to be disabled if no user is selected
     
 THE LISTS:
-  * ListBoxes that contains objects of class User
-    - ListBox for "normal/regular" users
-    - ListBox for administrator users
-  * Users to only be displayed as their names in the lists
   * When a user is selected in a list, display full user-information
     - Label to display full user-information
 
