@@ -103,6 +103,12 @@ namespace Lab5
             {
                 userToEdit.Name = userNameTextBox.Text;
                 userToEdit.Email = userEmailTextBox.Text;
+                normalUserListBox.SelectedItem = null;
+                adminUserListBox.SelectedItem = null;
+                editSelectedUserButton.IsEnabled = false;
+                displaySelectedUserNameLabel.Content = null;
+                displaySelectedUserEmailLabel.Content = null;
+                ClearTextBoxes();
                 normalUserListBox.Items.Refresh();
                 adminUserListBox.Items.Refresh();
             }
@@ -119,8 +125,11 @@ namespace Lab5
                 adminUserListBox.SelectedItem = null;
                 convertToAdminButton.IsEnabled = true;
                 convertToNormalUserButton.IsEnabled = false;
+                OnSelectingAUser();
             }
         }
+
+
         private void OnAdminUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             User userToEdit = null;
@@ -132,7 +141,13 @@ namespace Lab5
                 normalUserListBox.SelectedItem = null;
                 convertToNormalUserButton.IsEnabled = true;
                 convertToAdminButton.IsEnabled = false;
+                OnSelectingAUser();
             }
+        }
+        private void OnSelectingAUser()
+        {
+            editSelectedUserButton.IsEnabled = true;
+            removeSelectedUserButton.IsEnabled = true;
         }
 
         private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
@@ -141,6 +156,7 @@ namespace Lab5
             string userEmail = userEmailTextBox.Text;
             User newUser = new User(userName, userEmail);
             normalUserList.Add(newUser);
+            ClearTextBoxes();
             normalUserListBox.Items.Refresh();
         }
 
@@ -150,8 +166,15 @@ namespace Lab5
             fromList.Remove(objectToTransfer);
             displaySelectedUserNameLabel.Content = null;
             displaySelectedUserEmailLabel.Content = null;
+            ClearTextBoxes();
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
+        }
+
+        private void ClearTextBoxes()
+        {
+            userNameTextBox.Clear();
+            userEmailTextBox.Clear();
         }
     }
 }
