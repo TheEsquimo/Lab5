@@ -41,7 +41,6 @@ namespace Lab5
             userEmailTextBox.TextChanged += OnUserEmailTextBoxTextChanged;
             normalUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
             adminUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
-
         }
 
         private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
