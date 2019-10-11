@@ -7,8 +7,6 @@ CREATE AND CHANGE USERS:
   * Create users:
     - Disable on empty fields
   * Change users:
-    - reuse name and email textbox
-    - button to submit changes to selected user
     - button to be disabled if no user is selected
   * Delete users:
     - button to be disabled if no user is selected
