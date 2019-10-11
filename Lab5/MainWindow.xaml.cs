@@ -20,9 +20,28 @@ namespace Lab5
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<User> userList = new List<User>();
+        List<User> adminUserList = new List<User>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            normalUserListBox.ItemsSource = userList;
+            normalUserListBox.DisplayMemberPath = "Name";
+            adminUserListBox.ItemsSource = adminUserList;
+            adminUserListBox.DisplayMemberPath = "Name";
+
+            createNewUserButton.Click += OnCreateNewUserButtonClicked;
+        }
+
+        private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
+        {
+            string userName = userNameTextBox.Text;
+            string userEmail = userEmailTextBox.Text;
+            User newUser = new User(userName, userEmail);
+            userList.Add(newUser);
+            normalUserListBox.Items.Refresh();
         }
     }
 }
