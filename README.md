@@ -11,7 +11,6 @@ CREATE AND CHANGE USERS:
     - button to submit changes to selected user
     - button to be disabled if no user is selected
   * Delete users:
-    - button to delete selected user (remove from list)
     - button to be disabled if no user is selected
     
 THE LISTS:
