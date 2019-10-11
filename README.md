@@ -5,9 +5,7 @@ ONLY USE BUTTON, LABEL, TEXTBOX AND LISTBOX
 
 CREATE AND CHANGE USERS:
   * Create users:
-    - textbox for name
-    - textbox for email
-    - button to create/submit new user (of class User) to "normal" user-list
+    - Disable on empty fields
   * Change users:
     - reuse name and email textbox
     - button to submit changes to selected user
@@ -25,12 +23,5 @@ THE LISTS:
     - Label to display full user-information
 
 MOVE USERS:
-  * Move users between the lists
-    - Button to make selected "normal" user become an admin. Remove from normal list, add to admin-list
-      - Button disabled when no "normal" user is selected
-    - Button to make selected admin user become a "normal" user. Remove from admin list, add to normal list
-      - Button disabled when no admin user is selected
-      
-USER CLASS:
-  * Name property
-  * Email property
+ * Make admin button disabled when no "normal" user is selected
+ * Make remove admin button disabled when no admin user is selected
