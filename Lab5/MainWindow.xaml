@@ -9,7 +9,7 @@
     <Grid>
         <ListBox x:Name="normalUserListBox" HorizontalAlignment="Left" Height="100" Margin="110,169,0,0" VerticalAlignment="Top" Width="100"/>
         <ListBox x:Name="adminUserListBox" HorizontalAlignment="Left" Height="100" Margin="559,169,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="createNewUserButton" Content="Create User" HorizontalAlignment="Left" Margin="339,238,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="createNewUserButton" Content="Create User" HorizontalAlignment="Left" Margin="339,238,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False"/>
         <Button x:Name="removeSelectedUserButton" Content="Remove User" HorizontalAlignment="Left" Margin="339,274,0,0" VerticalAlignment="Top" Width="155"/>
         <Button x:Name="editSelectedUserButton" Content="Edit User" HorizontalAlignment="Left" Margin="419,238,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="convertToAdminButton" Content="Make Admin" HorizontalAlignment="Left" Margin="110,274,0,0" VerticalAlignment="Top" Width="100"/>
