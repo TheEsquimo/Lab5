@@ -52,8 +52,8 @@ namespace Lab5
 
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            string currentText = userEmailTextBox.Text;
-            Match nonWhitespaceExists = Regex.Match(currentText, @"[a-z]");
+            string currentText = userNameTextBox.Text;
+            Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
             if (nonWhitespaceExists.Success) { createNewUserButton.IsEnabled = true; }
             else { createNewUserButton.IsEnabled = false; }
         }
@@ -64,6 +64,7 @@ namespace Lab5
             {
                 User userToTransfer = (User)adminUserListBox.SelectedItem;
                 TransferUserToList(userToTransfer, adminUserList, normalUserList);
+                convertToNormalUserButton.IsEnabled = false;
             }
         }
 
@@ -73,6 +74,7 @@ namespace Lab5
             {
                 User userToTransfer = (User)normalUserListBox.SelectedItem;
                 TransferUserToList(userToTransfer, normalUserList, adminUserList);
+                convertToAdminButton.IsEnabled = false;
             }
         }
 
@@ -115,6 +117,8 @@ namespace Lab5
                 displaySelectedUserNameLabel.Content = userToEdit.Name;
                 displaySelectedUserEmailLabel.Content = userToEdit.Email;
                 adminUserListBox.SelectedItem = null;
+                convertToAdminButton.IsEnabled = true;
+                convertToNormalUserButton.IsEnabled = false;
             }
         }
         private void OnAdminUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -126,6 +130,8 @@ namespace Lab5
                 displaySelectedUserNameLabel.Content = userToEdit.Name;
                 displaySelectedUserEmailLabel.Content = userToEdit.Email;
                 normalUserListBox.SelectedItem = null;
+                convertToNormalUserButton.IsEnabled = true;
+                convertToAdminButton.IsEnabled = false;
             }
         }
 
@@ -142,6 +148,8 @@ namespace Lab5
         {
             toList.Add(objectToTransfer);
             fromList.Remove(objectToTransfer);
+            displaySelectedUserNameLabel.Content = null;
+            displaySelectedUserEmailLabel.Content = null;
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
         }
