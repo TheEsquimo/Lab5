@@ -40,9 +40,10 @@ namespace Lab5
             convertToNormalUserButton.Click += OnConvertToNormalUserButtonClicked;
             userNameTextBox.TextChanged += OnUserNameTextBoxTextChanged;
             userEmailTextBox.TextChanged += OnUserEmailTextBoxTextChanged;
-            normalUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
-            adminUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
+            normalUserListBox.SelectionChanged += OnNormalUserListBoxSelectionChanged;
+            adminUserListBox.SelectionChanged += OnAdminUserListBoxSelectionChanged;
         }
+
 
         private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
@@ -105,9 +106,27 @@ namespace Lab5
             }
         }
 
-        private void OnUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnNormalUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            User userToEdit = null;
+            if (normalUserListBox.SelectedItem != null)
+            {
+                userToEdit = (User)normalUserListBox.SelectedItem;
+                displaySelectedUserNameLabel.Content = userToEdit.Name;
+                displaySelectedUserEmailLabel.Content = userToEdit.Email;
+                adminUserListBox.SelectedItem = null;
+            }
+        }
+        private void OnAdminUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User userToEdit = null;
+            if (adminUserListBox.SelectedItem != null)
+            {
+                userToEdit = (User)adminUserListBox.SelectedItem;
+                displaySelectedUserNameLabel.Content = userToEdit.Name;
+                displaySelectedUserEmailLabel.Content = userToEdit.Email;
+                normalUserListBox.SelectedItem = null;
+            }
         }
 
         private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
