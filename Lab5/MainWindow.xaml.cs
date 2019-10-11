@@ -33,6 +33,50 @@ namespace Lab5
             adminUserListBox.DisplayMemberPath = "Name";
 
             createNewUserButton.Click += OnCreateNewUserButtonClicked;
+            editSelectedUserButton.Click += OnEditSelectedUserButtonClicked;
+            removeSelectedUserButton.Click += OnRemoveSelectedUserButtonClicked;
+            convertToAdminButton.Click += OnConvertToAdminButtonClicked;
+            convertToNormalUserButton.Click += OnConvertToNormalUserButtonClicked;
+            userNameTextBox.TextChanged += OnUserNameTextBoxTextChanged;
+            userEmailTextBox.TextChanged += OnUserEmailTextBoxTextChanged;
+            normalUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
+            adminUserListBox.SelectionChanged += OnUserListBoxSelectionChanged;
+
+        }
+
+        private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OnConvertToNormalUserButtonClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnConvertToAdminButtonClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnRemoveSelectedUserButtonClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnEditSelectedUserButtonClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
