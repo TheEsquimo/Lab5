@@ -23,6 +23,8 @@ namespace Lab5
     {
         List<User> normalUserList = new List<User>();
         List<User> adminUserList = new List<User>();
+        bool userCreationNameAccepted = false;
+        bool userCreationEmailAccepted = false;
 
         public MainWindow()
         {
@@ -47,14 +49,27 @@ namespace Lab5
 
         private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-
+            string currentText = userEmailTextBox.Text;
+            Match emailRequirement = Regex.Match(currentText, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+            + "@"
+            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+            if (emailRequirement.Success)
+            {
+                userCreationEmailAccepted = true;
+                if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
+            }
+            else { createNewUserButton.IsEnabled = false; }
         }
 
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            string currentText = userEmailTextBox.Text;
-            Match nonWhitespaceExists = Regex.Match(currentText, @"[a-z]");
-            if (nonWhitespaceExists.Success) { createNewUserButton.IsEnabled = true; }
+            string currentText = userNameTextBox.Text;
+            Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
+            if (nonWhitespaceExists.Success)
+            {
+                userCreationNameAccepted = true;
+                if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
+            }
             else { createNewUserButton.IsEnabled = false; }
         }
 
@@ -144,6 +159,12 @@ namespace Lab5
             fromList.Remove(objectToTransfer);
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
+        }
+
+        private string EmailIdentificationRegex()
+        {
+            return "lol";
+   ;
         }
     }
 }
