@@ -73,7 +73,18 @@ namespace Lab5
 
         private void OnRemoveSelectedUserButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            if (normalUserListBox.SelectedItem != null)
+            {
+                User userToRemove = (User)normalUserListBox.SelectedItem;
+                normalUserList.Remove(userToRemove);
+                normalUserListBox.Items.Refresh();
+            }
+            else if (adminUserListBox.SelectedItem != null)
+            {
+                User userToRemove = (User)adminUserListBox.SelectedItem;
+                adminUserList.Remove(userToRemove);
+                adminUserListBox.Items.Refresh();
+            }
         }
 
         private void OnEditSelectedUserButtonClicked(object sender, RoutedEventArgs e)
