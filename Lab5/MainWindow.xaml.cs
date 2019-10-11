@@ -20,14 +20,14 @@ namespace Lab5
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<User> userList = new List<User>();
+        List<User> normalUserList = new List<User>();
         List<User> adminUserList = new List<User>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            normalUserListBox.ItemsSource = userList;
+            normalUserListBox.ItemsSource = normalUserList;
             normalUserListBox.DisplayMemberPath = "Name";
             adminUserListBox.ItemsSource = adminUserList;
             adminUserListBox.DisplayMemberPath = "Name";
@@ -55,12 +55,20 @@ namespace Lab5
 
         private void OnConvertToNormalUserButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            if (adminUserListBox.SelectedItem != null)
+            {
+                User userToTransfer = (User)adminUserListBox.SelectedItem;
+                TransferUserToList(userToTransfer, adminUserList, normalUserList);
+            }
         }
 
         private void OnConvertToAdminButtonClicked(object sender, RoutedEventArgs e)
         {
-
+            if (normalUserListBox.SelectedItem != null)
+            {
+                User userToTransfer = (User)normalUserListBox.SelectedItem;
+                TransferUserToList(userToTransfer, normalUserList, adminUserList);
+            }
         }
 
         private void OnRemoveSelectedUserButtonClicked(object sender, RoutedEventArgs e)
@@ -83,8 +91,16 @@ namespace Lab5
             string userName = userNameTextBox.Text;
             string userEmail = userEmailTextBox.Text;
             User newUser = new User(userName, userEmail);
-            userList.Add(newUser);
+            normalUserList.Add(newUser);
             normalUserListBox.Items.Refresh();
+        }
+
+        private void TransferUserToList(User objectToTransfer, List<User> fromList, List<User> toList)
+        {
+            toList.Add(objectToTransfer);
+            fromList.Remove(objectToTransfer);
+            normalUserListBox.Items.Refresh();
+            adminUserListBox.Items.Refresh();
         }
     }
 }
