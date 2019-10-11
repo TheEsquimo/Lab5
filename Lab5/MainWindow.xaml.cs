@@ -160,11 +160,5 @@ namespace Lab5
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
         }
-
-        private string EmailIdentificationRegex()
-        {
-            return "lol";
-   ;
-        }
     }
 }
