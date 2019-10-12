@@ -58,7 +58,11 @@ namespace Lab5
                 userCreationEmailAccepted = true;
                 if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
             }
-            else { createNewUserButton.IsEnabled = false; }
+            else
+            {
+                userCreationEmailAccepted = false;
+                createNewUserButton.IsEnabled = false;
+            }
         }
 
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
@@ -71,7 +75,11 @@ namespace Lab5
                 userCreationNameAccepted = true;
                 if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
             }
-            else { createNewUserButton.IsEnabled = false; }
+            else
+            {
+                userCreationNameAccepted = false;
+                createNewUserButton.IsEnabled = false;
+            }
         }
 
         private void OnConvertToNormalUserButtonClicked(object sender, RoutedEventArgs e)
