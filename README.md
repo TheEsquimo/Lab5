@@ -10,7 +10,3 @@ CREATE AND CHANGE USERS:
     - button to be disabled if no user is selected
   * Delete users:
     - button to be disabled if no user is selected
-
-MOVE USERS:
- * Make admin button disabled when no "normal" user is selected
- * Make remove admin button disabled when no admin user is selected
