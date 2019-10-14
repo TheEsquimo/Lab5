@@ -139,9 +139,6 @@ namespace Lab5
             {
                 userToEdit.Name = userNameTextBox.Text;
                 userToEdit.Email = userEmailTextBox.Text;
-                normalUserListBox.SelectedItem = null;
-                adminUserListBox.SelectedItem = null;
-                editSelectedUserButton.IsEnabled = false;
                 ClearDisplayInfoLabels();
                 ClearTextBoxes();
                 normalUserListBox.Items.Refresh();
@@ -161,7 +158,7 @@ namespace Lab5
                 adminUserListBox.SelectedItem = null;
                 convertToAdminButton.IsEnabled = true;
                 convertToNormalUserButton.IsEnabled = false;
-                OnSelectingAUser();
+                removeSelectedUserButton.IsEnabled = true;
             }
             else
             {
@@ -181,18 +178,13 @@ namespace Lab5
                 normalUserListBox.SelectedItem = null;
                 convertToNormalUserButton.IsEnabled = true;
                 convertToAdminButton.IsEnabled = false;
-                OnSelectingAUser();
+                removeSelectedUserButton.IsEnabled = true;
             }
             else
             {
                 editSelectedUserButton.IsEnabled = false;
                 removeSelectedUserButton.IsEnabled = false;
             }
-        }
-
-        private void OnSelectingAUser()
-        {
-            removeSelectedUserButton.IsEnabled = true;
         }
 
         private void OnCreateNewUserButtonClicked(object sender, RoutedEventArgs e)
@@ -213,10 +205,10 @@ namespace Lab5
             adminUserListBox.SelectedItem = null;
         }
 
-        private void TransferUserToList(User objectToTransfer, List<User> fromList, List<User> toList)
+        private void TransferUserToList(User userToTransfer, List<User> fromList, List<User> toList)
         {
-            toList.Add(objectToTransfer);
-            fromList.Remove(objectToTransfer);
+            toList.Add(userToTransfer);
+            fromList.Remove(userToTransfer);
             ClearDisplayInfoLabels();
             normalUserListBox.Items.Refresh();
             adminUserListBox.Items.Refresh();
