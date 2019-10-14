@@ -203,6 +203,8 @@ namespace Lab5
         {
             normalUserListBox.SelectedItem = null;
             adminUserListBox.SelectedItem = null;
+            convertToAdminButton.IsEnabled = false;
+            convertToNormalUserButton.IsEnabled = false;
         }
 
         private void TransferUserToList(User userToTransfer, List<User> fromList, List<User> toList)
