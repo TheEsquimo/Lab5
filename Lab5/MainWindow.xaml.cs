@@ -159,6 +159,10 @@ namespace Lab5
                 convertToAdminButton.IsEnabled = true;
                 convertToNormalUserButton.IsEnabled = false;
                 removeSelectedUserButton.IsEnabled = true;
+                if (UserNameRequirementSuccesfull(userNameTextBox.Text) && EmailRequirementSuccesful(userEmailTextBox.Text))
+                {
+                    editSelectedUserButton.IsEnabled = true;
+                }
             }
             else
             {
@@ -179,6 +183,10 @@ namespace Lab5
                 convertToNormalUserButton.IsEnabled = true;
                 convertToAdminButton.IsEnabled = false;
                 removeSelectedUserButton.IsEnabled = true;
+                if (UserNameRequirementSuccesfull(userNameTextBox.Text) && EmailRequirementSuccesful(userEmailTextBox.Text))
+                {
+                    editSelectedUserButton.IsEnabled = true;
+                }
             }
             else
             {
