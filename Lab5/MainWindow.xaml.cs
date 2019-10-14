@@ -46,32 +46,50 @@ namespace Lab5
             adminUserListBox.SelectionChanged += OnAdminUserListBoxSelectionChanged;
         }
 
-
         private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             string currentText = userEmailTextBox.Text;
-            Match emailRequirement = Regex.Match(currentText, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
-            + "@"
-            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
-            if (emailRequirement.Success)
+            if (emailRequirementSuccesful(currentText))
             {
                 userCreationEmailAccepted = true;
-                if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
+                if (userCreationNameAccepted)
+                {
+                    createNewUserButton.IsEnabled = true;
+                    if (normalUserListBox.SelectedItem != null || adminUserListBox.SelectedItem != null)
+                    {
+                        editSelectedUserButton.IsEnabled = true;
+                    }
+                }
             }
-            else { createNewUserButton.IsEnabled = false; }
+            else
+            {
+                userCreationEmailAccepted = false;
+                createNewUserButton.IsEnabled = false;
+                editSelectedUserButton.IsEnabled = false;
+            }
         }
 
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             string currentText = userNameTextBox.Text;
-            Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
-
-            if (nonWhitespaceExists.Success)
+            if (userNameRequirementSuccesfull(currentText))
             {
                 userCreationNameAccepted = true;
-                if (userCreationNameAccepted && userCreationEmailAccepted) { createNewUserButton.IsEnabled = true; }
+                if (userCreationEmailAccepted)
+                {
+                    createNewUserButton.IsEnabled = true;
+                    if (normalUserListBox.SelectedItem != null || adminUserListBox.SelectedItem != null)
+                    {
+                        editSelectedUserButton.IsEnabled = true;
+                    }
+                }
             }
-            else { createNewUserButton.IsEnabled = false; }
+            else
+            {
+                userCreationNameAccepted = false;
+                createNewUserButton.IsEnabled = false;
+                editSelectedUserButton.IsEnabled = false;
+            }
         }
 
         private void OnConvertToNormalUserButtonClicked(object sender, RoutedEventArgs e)
@@ -108,6 +126,8 @@ namespace Lab5
                 adminUserList.Remove(userToRemove);
                 adminUserListBox.Items.Refresh();
             }
+            ClearDisplayInfoLabels();
+            DeselectUser();
         }
 
         private void OnEditSelectedUserButtonClicked(object sender, RoutedEventArgs e)
@@ -126,6 +146,7 @@ namespace Lab5
                 ClearTextBoxes();
                 normalUserListBox.Items.Refresh();
                 adminUserListBox.Items.Refresh();
+                DeselectUser();
             }
         }
 
@@ -142,8 +163,12 @@ namespace Lab5
                 convertToNormalUserButton.IsEnabled = false;
                 OnSelectingAUser();
             }
+            else
+            {
+                editSelectedUserButton.IsEnabled = false;
+                removeSelectedUserButton.IsEnabled = false;
+            }
         }
-
 
         private void OnAdminUserListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -158,10 +183,15 @@ namespace Lab5
                 convertToAdminButton.IsEnabled = false;
                 OnSelectingAUser();
             }
+            else
+            {
+                editSelectedUserButton.IsEnabled = false;
+                removeSelectedUserButton.IsEnabled = false;
+            }
         }
+
         private void OnSelectingAUser()
         {
-            editSelectedUserButton.IsEnabled = true;
             removeSelectedUserButton.IsEnabled = true;
         }
 
@@ -173,6 +203,14 @@ namespace Lab5
             normalUserList.Add(newUser);
             ClearTextBoxes();
             normalUserListBox.Items.Refresh();
+            DeselectUser();
+            ClearDisplayInfoLabels();
+        }
+
+        private void DeselectUser()
+        {
+            normalUserListBox.SelectedItem = null;
+            adminUserListBox.SelectedItem = null;
         }
 
         private void TransferUserToList(User objectToTransfer, List<User> fromList, List<User> toList)
@@ -194,6 +232,20 @@ namespace Lab5
         {
             displaySelectedUserNameLabel.Content = null;
             displaySelectedUserEmailLabel.Content = null;
+        }
+
+        private bool userNameRequirementSuccesfull(string currentText)
+        {
+            Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
+            return nonWhitespaceExists.Success;
+        }
+
+        private bool emailRequirementSuccesful(string currentText)
+        {
+            Match emailRequirement = Regex.Match(currentText, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+            + "@"
+            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+            return emailRequirement.Success;
         }
     }
 }
