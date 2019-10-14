@@ -49,7 +49,7 @@ namespace Lab5
         private void OnUserEmailTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             string currentText = userEmailTextBox.Text;
-            if (emailRequirementSuccesful(currentText))
+            if (EmailRequirementSuccesful(currentText))
             {
                 userCreationEmailAccepted = true;
                 if (userCreationNameAccepted)
@@ -72,7 +72,7 @@ namespace Lab5
         private void OnUserNameTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             string currentText = userNameTextBox.Text;
-            if (userNameRequirementSuccesfull(currentText))
+            if (UserNameRequirementSuccesfull(currentText))
             {
                 userCreationNameAccepted = true;
                 if (userCreationEmailAccepted)
@@ -234,13 +234,13 @@ namespace Lab5
             displaySelectedUserEmailLabel.Content = null;
         }
 
-        private bool userNameRequirementSuccesfull(string currentText)
+        private bool UserNameRequirementSuccesfull(string currentText)
         {
             Match nonWhitespaceExists = Regex.Match(currentText, @"\S");
             return nonWhitespaceExists.Success;
         }
 
-        private bool emailRequirementSuccesful(string currentText)
+        private bool EmailRequirementSuccesful(string currentText)
         {
             Match emailRequirement = Regex.Match(currentText, @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
             + "@"
